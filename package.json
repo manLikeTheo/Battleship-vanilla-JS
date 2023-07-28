@@ -1,0 +1,27 @@
+{
+  "name": "battleship-vanilla-js",
+  "version": "1.0.0",
+  "description": "Build the Battleship game using the TDD method",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manLikeTheo/Battleship-vanilla-JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manLikeTheo/Battleship-vanilla-JS/issues"
+  },
+  "homepage": "https://github.com/manLikeTheo/Battleship-vanilla-JS#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "babel-jest": "^29.6.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
