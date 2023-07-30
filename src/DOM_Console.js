@@ -369,6 +369,81 @@ class DOM_CONSOLE {
             }, 1500);
         }
     }
+
+    showHits() {
+        //on computer's board
+        for(const ship of computerGameboard.occupiedLocations.keys()) {
+            for(const hitLocation of ship.damageLocations) {
+                const dot = document.querySelector(`.cell.computer.${hitLocation} span`);
+                dot.classList.remove("invisible-dot");
+                dot.classList.add("hit");
+            }
+        }
+
+        //on player's board
+        for(const ship of playerGameboard.occupiedLocations.key()) {
+            for(const hitLocation of ship.damageLocations) {
+                const dot = document.querySelector(`.cell.player.${hitLocation} span`);
+                dot.classList.remove("invisible-dot");
+                dot.classList.add("hit");
+            }
+        }
+    }
+
+    showPlayersShips() {
+        //location on player's board
+        for(let setOfLocations of playerGameboard.occupiedLocations.values()) {
+            for(let location of setOfLocations) {
+                const cell = document.querySelector(`.cell.player.${location}`);
+                cell.classList.add("ship");
+            }
+        }
+    }
+
+    showMissedShots() {
+        //on computer's gameboard
+        for (const missedShotLocation of computerGameboard.missedShotsFromEnemy) {
+            const dot = document.querySelector(`.cell.computer.${missedShotLocation} span`);
+            dot.classList.remove('invisible-dot');
+            dot.classList.add('make-visible-and-white');
+        }
+
+        //on player's gameboard
+        for (const missedShotLocation of playerGameboard.missedShotsFromEnemy) {
+            const dot = document.querySelector(`.cell.player.${missedShotLocation} span`);
+            dot.classList.remove('invisible-dot');
+            dot.classList.add('make-visible-and-white');
+        }
+    }
+
+    handleClick(e) {
+        if(this.attackAgainstComputer(e) !== "repeat shot") {
+            this.showMissedShots();
+            this.showHits();
+            this.createComputerAttackFunctionality();
+        }
+    }
+
+    attackAgainstComputer(e) {
+        const coords = e.currentShip.classList[2];
+        const resultOfAttackOnEnemy = player.attack(coords, computerBoard);
+        if(Array.isArray(resultOfAttackOnEnemy)) {
+            const shipName = resultOfAttackOnEnemy[1].toUpperCase();
+            if(resultOfAttackOnEnemy[0] === "hit ship") {
+                const hitStatus = ["DIRECT HIT!", "TARGET HIT!", `TARGET HIT AT COORDINATE ${coords}!`, "ENEMY TARGET HIT!", `ENEMY TARGET HIT AT COORDINATE ${coords}!`];
+                status.textContent = _.sample(hitStatus);
+            } else if(resultOfAttackOnEnemy === "attack missed") {
+                const missedStatusSet = ['TARGET MISSED',
+                'TARGET MISSED, SIR', 'ENEMY TARGET MISSED'];
+                const missstatus = _.sample(missedStatusSet);
+                status.textContent = missstatus;
+            } else if(resultOfAttackOnEnemy === "repeat shot") {
+                return resultOfAttackOnEnemy;
+            }
+        }
+    }
 }
 
 const domConsole = new DOM_CONSOLE();
+
+export default domConsole;

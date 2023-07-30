@@ -4,7 +4,11 @@
   "description": "Build the Battleship game using the TDD method",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open",
+    "test": "jest",
+    "twatch": "jest --watch *.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +25,19 @@
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "babel-jest": "^29.6.2",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
